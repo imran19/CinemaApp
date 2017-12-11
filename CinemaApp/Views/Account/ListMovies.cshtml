@@ -1,0 +1,224 @@
+﻿@model CinemaApp.Models.Movie
+@using CinemaApp.Models
+
+@{
+    ViewBag.Title = "ListMovies";
+    List<Movie> movies = ViewData["MovieList"] as List<Movie>;
+    List<Category> categories = ViewData["cats"] as List<Category>;
+}
+<!DOCTYPE html>
+<head>
+    <link href="~/assets/css/alicancss.css" rel="stylesheet" />
+</head>
+<body>
+    <a class="btn" href="/Account/AdminPanel">Homepage</a>
+    <span class="btn addClass">Add Movie</span>
+    <hr />
+    <div id="frame">
+        <div id="add">
+            <span class="close">X</span>
+            @using (Html.BeginForm("AddMovie", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new {  @class = "form-control", @required = "required"} })
+                          @*  @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" }) *@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Director, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Director, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Stars, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Stars, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Stars, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Information, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Information, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Information, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Category</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control" name="CategoryId">
+                                @foreach (var item in categories)
+                                {
+                                    <option class="form-control" value="@item.Id">@item.CategoryName</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Released Date</b></span>
+                        <div class="col-md-10">
+                            <input type="date" class="form-control" id="ReleasedDate" name="ReleasedDate" required />
+                            @* @Html.EditorFor(model => model.ReleasedDate, new { htmlAttributes = new { @class = "date-picker" } }) *@
+                            @Html.ValidationMessageFor(model => model.ReleasedDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" name="imagee" id="imagee" accept="image/*" />
+                            @* @Html.EditorFor(model => model.Picture, new { htmlAttributes = new { @class = "form-control" } }) *@
+                            @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="number" name="Price" id="Price" class="form-control" required />
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Time :</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control select-time" name="Time1">
+                                <option class="form-control dropdownList"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Screen for Time 1</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control select-group" name="ScreenLinkTime1">
+                                    <option class="form-control dropdownList"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Time :</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control select-time" name="Time2">
+                                <option class="form-control dropdownList"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Screen for Time 2</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control select-group" name="ScreenLinkTime2">        
+                                <option class="form-control dropdownList"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Time :</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control select-time" name="Time3">
+                                <option class="form-control dropdownList"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class="control-label col-md-2"><b>Screen for Time 3</b></span>
+                        <div class="col-md-10">
+                            <select class="dropdown form-control select-group" name="ScreenLinkTime3">
+                                    <option class="form-control dropdownList"></option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    @if (categories.Count == 0)
+    {
+        <h2>There is no any movie in the database.</h2>
+    }
+    else
+    {
+        <table class="table">
+            <thead>
+            <td><b>Picture</b></td>
+            <td><b>Name</b></td>
+            <td><b>Stars</b></td>
+            <td><b>Director</b></td>
+            <td><b>Information</b></td>
+            <td><b>Released Date</b></td>
+            <td><b>Category</b></td>
+            <td><b>Session</b></td>
+            <td><b>Price</b></td>
+            <td><b>Action</b></td>
+            </thead>
+
+            <tbody>
+                @foreach (var item in movies)
+                {
+                    <tr>
+                        <td>
+                            @if (item.Image != null)
+                            {
+                                <img class="img-rounded img-responsive" src="data:image/jpg;base64,@System.Convert.ToBase64String(item.Image)" width="250" height="400" />
+                            }
+                            else
+                            { <span class="alert-info">Picture not found.</span> }
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.Stars</td>
+                        <td>@item.Director</td>
+                        <td>@item.Information</td>
+                        <td>@item.ReleasedDate.ToShortDateString()</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle sessions" type="button" data-toggle="dropdown">
+                                    Sessions
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="unclickable">@item.Time1</a></li>
+                                    <li><a class="unclickable">@item.Time2</a></li>
+                                    <li><a class="unclickable">@item.Time3</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>@item.Price KM</td>
+                        <td>
+                            <a href="~/Account/Edit?MovieId=@item.Id">Edit</a>
+                            <a href="~/Account/DeleteMovie?MovieId=@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/assets/js/alican.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

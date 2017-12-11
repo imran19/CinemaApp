@@ -1,0 +1,27 @@
+﻿@model CinemaApp.Models.Report
+@using CinemaApp.Models
+@{
+    ViewBag.Title = "ReportIssue";
+}
+
+Issue creator: @Session["Name"].ToString()&nbsp;@Session["Surname"].ToString()
+<br />
+<br />
+<form action="SendIssue" method="post">
+    <table>
+        <tr>
+            <td> Issue:</td>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="Message" class="form-control" cols="50" rows="25" required></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" class="btn" value="Send the issue" /> &nbsp; <input type="reset" class="btn" /></td>
+        </tr>
+    </table>
+</form>
+<div>
+    @Html.ActionLink("Back", "Homepage","Account")
+</div>

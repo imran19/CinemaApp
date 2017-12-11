@@ -1,0 +1,164 @@
+﻿@model CinemaApp.Models.ReservedSeat
+@using CinemaApp.Models;
+@{
+    ViewBag.Title = "Screen 1 ";
+    List<Screen13> scr = ViewData["ViewSeats"] as List<Screen13>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/assets/css/Seatscss.css" rel="stylesheet" />
+</head>
+<body>
+   @if (ViewBag.exception == null)
+   {
+    <label>@ViewBag.forMovieName</label>
+        <input type="hidden" class="movieName" value="@ViewBag.forMovieName" />
+        <input type="hidden" class="hidden-price" value="@ViewBag.forPrice" />
+        using (Html.BeginForm("ReserveForScreen13", "Screen13", FormMethod.Post))
+        {
+            <h2>@ViewBag.Error</h2>
+            <h2>@Html.ValidationSummary(true, "", new { @class = "text-danger" })</h2>
+            <div class="col-md-6">
+                <div style="margin-left:78px;">
+                    <img src="~/assets/images/screen-column/screen.png" />
+                </div>
+                <div id="holder">
+                    <div class="col-md-1">
+                        <img src="~/assets/images/screen-column/sonE.png" />
+                    </div>
+                    <div class="col-md-1" style="float:right;">
+                        <img src="~/assets/images/screen-column/sonE.png" />
+                    </div>
+                    @foreach (var item in scr)
+                    {
+                        if (@item.isReserved == true)
+                        {
+                            <div class="seat reserved">@item.SeatNumber</div>
+                        }
+                        else
+                        {
+                            <div class="seat">@item.SeatNumber</div>
+                        }
+                    }
+
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div class="col-md-7"></div>
+            <div class="col-md-12">
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Time</label>
+                        <div class="col-md-10">
+                            <input type="text" name="Time" id="Time" class="form-control" value="@ViewBag.forTime3" />
+                            @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Seat(s) </label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ReservedSeats, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReservedSeats, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Price </label>
+                        <div class="col-md-10">
+                            <label class="price">-</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="button" value="Next" id="Next" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="Bill col-md-12" id="Bill" style="margin-top:-625px;">
+                <div class="frame">
+                    <div class="top-information col-md-12">
+                        <label class="cashier">Cashier: @Session["Name"]&nbsp;@Session["Surname"]</label>
+                        <label class="date"></label>
+                    </div>
+                    <div class="ribaCinema col-md-offset-2" style="margin-left:225px;"><label class="ribaCinemaLabel">Riba CINEMA</label></div>
+                    <div class="middleTitles">
+                        <table class="col-md-12">
+                            <thead>
+                            <td class="col-md-4">Time</td>
+                            <td class="col-md-4">Movie Name</td>
+                            <td class="col-md-4">Seat Number(s)</td>
+                            </thead>
+                            <tbody>
+                            <td class="col-md-4"><b><span class="labelTime"></span></b></td>
+                            <td class="col-md-4"><b><span class="labelMovie"></span></b></td>
+                            <td class="col-md-4"><b><span class="labelSeatNumber"></span></b></td>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="address" style="margin-top:100px;">
+                        <center><span>Stupska BB C1/17 Ilidza - Sarajevo</span></center>
+                    </div>
+                    <div style="float:right; margin-right:25px;" class="divLabelPrice"><span class="price"></span></div>
+                    <div class="logo" style="margin-top:50px;">
+                        <center>
+                            <img src="#" class="imglogo" alt="QR Code system does not work. Contact Admin immediately!" />
+                        </center>
+                    </div>
+                    <div class="wishMessage" style="margin-top:20px;">
+                        <center>
+                            <span>Have fun!</span>
+                        </center>
+                    </div>
+                </div>
+
+                <div class="footer-buttons" style="margin-top:30px;">
+                    <input type="submit" value="Save and Print" id="Print" class="btn btn-default" />
+                    <label>This bill is for customer. Do not forget to give it!</label>
+                    <input type="button" style="float:right;" value="Back" class="btn btn-danger Back" />
+                </div>
+            </div>
+        }
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/assets/js/date.js"></script>
+        <script src="~/assets/js/Seats.js"></script>
+   } else
+   {
+       <h1>Contact Admin!!!</h1>
+   }
+</body>
+</html>

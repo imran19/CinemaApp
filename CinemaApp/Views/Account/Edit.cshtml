@@ -1,0 +1,110 @@
+﻿@using CinemaApp.Models
+@{
+    ViewBag.Title = "Edit";
+    Movie MovieToEdit = ViewData["movie"] as Movie;
+    List<Category> categories = ViewData["cats"] as List<Category>;
+
+}
+<form action="Update" method="post">
+    <input type="hidden" name="MovieId" value="@MovieToEdit.Id" />
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" class="form-control" value=@MovieToEdit.Name name="name" required /></td>
+        </tr>
+        <tr>
+            <td>Stars:</td>
+            <td><input type="text" class="form-control" value=@MovieToEdit.Stars name="stars" required /></td>
+        </tr>
+        <tr>
+            <td> Director:</td>
+            <td><input type="text" class="form-control" value=@MovieToEdit.Director name="director" required /></td>
+        </tr>
+        <tr>
+            <td> Information:</td>
+            <td><input type="text" class="form-control" value=@MovieToEdit.Information name="information" required /></td>
+        </tr>
+        <tr>
+            <td>Category</td>
+            <td>
+                <select class="dropdown form-control" name="CategoryId">
+                    @foreach (var item in categories)
+                    {
+                        <option class="form-control" value="@item.Id">@item.CategoryName</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Price</td>
+            <td><input type="number" class="form-control" required name="Price" value="@MovieToEdit.Price" /></td>
+        </tr>
+
+        <tr>
+            <td>Time</td>
+            <td>
+                <h6>Current Time: @MovieToEdit.Time1</h6>
+                <select class="dropdown form-control select-time" name="Time1">
+                    <option class="form-control" id="dropdownList"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Screen Time 1</td>
+            <td>
+                <h6>Current Screen: @MovieToEdit.ScreenLinkTime1</h6>
+                <select class="dropdown form-control select-group" name="ScreenLinkTime1">
+                    <option class="form-control" id="dropdownList"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Time</td>
+            <td>
+                <h6>Current Time: @MovieToEdit.Time2</h6>
+                <select class="dropdown form-control select-time" name="Time2">
+                    <option class="form-control" id="dropdownList"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Screen Time 2</td>
+            <td>
+                <h6>Current Screen: @MovieToEdit.ScreenLinkTime2</h6>
+                <select class="dropdown form-control select-group" name="ScreenLinkTime2">
+                    <option class="form-control" id="dropdownList"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Time</td>
+            <td>
+                <h6>Current Time: @MovieToEdit.Time3</h6>
+                <select class="dropdown form-control select-time" name="Time3">
+                    <option class="form-control" id="dropdownList"></option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Screen Time 3</td>
+            <td>
+                <h6>Current Screen: @MovieToEdit.ScreenLinkTime3</h6>
+                <select class="dropdown form-control select-group" name="ScreenLinkTime3">
+                    <option class="form-control" id="dropdownList"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" class="btn" value="Save" /></td>
+        </tr>
+    </table>
+</form>
+<script src="~/assets/js/jquery-1.10.2.min.js"></script>
+<script src="~/assets/js/alican.js"></script>
+

@@ -1,0 +1,47 @@
+﻿@using CinemaApp.Models;
+@{
+    ViewBag.Title = "EditReceptionist";
+    UserAccount editReceptionist = ViewData["receptionist"] as UserAccount;
+}
+
+<form action="UpdateReceptionist" method="post">
+    <input type="hidden" name="UserId" value="@editReceptionist.Id" />
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" class="form-control" value=@editReceptionist.Name name="name" required /></td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td><input type="text" class="form-control" value=@editReceptionist.Surname name="surname" required /></td>
+        </tr>
+        <tr>
+            <td>Birthday:</td>
+            <td><input type="date" class="form-control" value=@editReceptionist.Birthday name="birthday" required /></td>
+        </tr>
+        <tr>
+            <td>Place of Birthday:</td>
+            <td><input type="text" class="form-control" value=@editReceptionist.PlaceOfBirth name="placeofbirth" required /></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" class="form-control" value=@editReceptionist.Address name="address" required /></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="email" class="form-control" value=@editReceptionist.Email name="email" required /></td>
+        </tr>
+        <tr>
+            <td>Telephone:</td>
+            <td><input type="number" class="form-control" value=@editReceptionist.Telephone name="telephone" required maxlength="9" /></td>
+        </tr>
+        <tr>
+            <td>Salary:</td>
+            <td><input type="number" class="form-control" value=@editReceptionist.Salary name="salary" required/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" class="btn" value="Edit" /></td>
+        </tr>
+    </table>
+</form>

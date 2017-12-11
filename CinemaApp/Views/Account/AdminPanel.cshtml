@@ -1,0 +1,48 @@
+﻿@using CinemaApp.Models;
+@{
+    ViewBag.Title = "AdminPanel";
+    List<Report> reports = ViewData["ReportList"] as List<Report>;
+}
+
+
+<h4> Admin: @Session["Name"].ToString()&nbsp;@Session["Surname"].ToString()</h4>
+
+<center>
+    <a class="btn" href="/Account/ListMovies">List Movies</a>
+    <a class="btn" href="/Account/ListReceptionists">List Receptionists</a>
+    <div style="float:right">
+        <a class="btn btn-danger" href="/Account/ClearSeatScreen1">Clear Screen 1</a>
+        <a class="btn btn-danger" href="/Account/ClearSeatScreen2">Clear Screen 2</a>
+        <a class="btn btn-danger" href="/Account/ClearSeatScreen3">Clear Screen 3</a>
+    </div>
+</center>
+<br /><br /><br />
+<table class="table">
+    @if (reports.Count == 0)
+    {
+        <h4>There is no issue request.</h4>
+    }
+    else
+    {
+        <thead>
+        <td><b>Issuer Id</b></td>
+        <td><b>Issuer Name</b></td>
+        <td><b>Issue</b></td>
+        <td><b>Action</b></td>
+        </thead>
+        <tbody>
+            @foreach (var item in reports)
+            {
+                if (item.isSolved == false)
+                {
+                    <tr>
+                        <td>@item.ReceptionistId</td>
+                        <td>@item.ReceptionistName&nbsp;@item.ReceptionistSurname</td>
+                        <td>@item.Issue</td>
+                        <td><a href="~/Issue/Solved?id=@item.Id">Solved</a></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    }
+</table>

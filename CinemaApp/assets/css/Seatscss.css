@@ -1,0 +1,69 @@
+﻿#holder {
+    margin-bottom: 20px;
+}
+
+#sessions{
+    z-index:-1;
+}
+
+body{
+    z-index:-1;
+}
+
+
+.seat {
+    height: 40px;
+    width: 40px;
+    background-color: green;
+    float: left;
+    margin: 5px;
+    font-weight: bold;
+    color: #efefef;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.reserved {
+    background-color: red !important;
+    color: black !important;
+}
+
+.selected {
+    background-color: orange !important;
+}
+
+#Bill {
+    
+    margin-top: -550px;
+    position: relative;
+    height: 550px;
+    width: 550px;
+    background-color: white;
+    position: center;
+    display: none;
+}
+
+.cashier {
+    float: left;
+}
+
+.date {
+    float: right;
+}
+
+.footer-buttons {
+    position: relative;
+}
+
+.frame {
+    border: 1px solid gray;
+    margin-top:15px;
+    padding: 15px,15px,15px,15px;
+    z-index:2 !important;
+}
+
+.imglogo {
+    width: 200px;
+    height: 200px;
+}

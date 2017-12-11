@@ -1,0 +1,201 @@
+﻿@using CinemaApp.Models
+@model CinemaApp.Models.UserAccount
+
+@{
+    ViewBag.Title = "List Receptionist";
+    List<UserAccount> receptionists = ViewData["Receptionist"] as List<UserAccount>;
+}
+<!DOCTYPE html>
+<head>
+    <link href="~/assets/css/alicancss.css" rel="stylesheet" />
+</head>
+<body>
+
+    @* @Html.ValidationSummary()*@
+
+    <a class="btn" href="/Account/AdminPanel">Homepage</a>
+    <span class="btn addClass">Register a Receptionist</span>
+
+    <div id="frame">
+        <div id="add">
+            <span class="close">X</span>
+            @ViewBag.Message
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+
+                <div class="form-horizontal">
+                    <h4>Registration</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Surname, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Place of Birth</label>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PlaceOfBirth, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.PlaceOfBirth, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control", @required = "required", @maxlength = "9" } })
+                            @*@Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Salary, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Salary, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                            @*@Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+
+
+
+    <hr />
+    <table class="table">
+        <thead>
+        <td><b>Name</b></td>
+        <td><b>Surname</b></td>
+        <td><b>Birthday</b></td>
+        <td><b>Place of Birth</b></td>
+        <td><b>Address</b></td>
+        <td><b><center>Email</center></b></td>
+        <td><b>Telephone</b></td>
+        <td><b>Username</b></td>
+        <td><b>Salary</b></td>
+        <td><b>Current Position</b></td>
+        <td><b>Action</b></td>
+        <td><b>Started Date</b></td>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in receptionists)
+            {
+                if (item.Role != 250)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Surname</td>
+                        <td>@item.Birthday.ToShortDateString()</td>
+                        <td>@item.PlaceOfBirth</td>
+                        <td>@item.Address</td>
+                        <td>@item.Email</td>
+                        <td>@item.Telephone</td>
+                        <td>@item.Username</td>
+                        <td>@item.Salary&nbsp;KM</td>
+                        @if (item.Active == true)
+                        {
+                            <td>Working</td>
+                            <td>
+                                <a href="~/Account/EditReceptionist?UserId=@item.Id">Edit</a>
+                                <a href="~/Account/Unemployee?UserId=@item.Id">Unemployee</a>
+
+                            </td>
+                        }
+                        else
+                        {
+                            <td>Fired</td>
+                            <td>
+                                <a href="~/Account/EditReceptionist?UserId=@item.Id">Edit</a>
+                                <a href="~/Account/Employee?UserId=@item.Id">Employee</a>
+
+                            </td>
+                        }
+                        <td>@item.StartedDate</td>
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+        <tfoot>
+        <td><b>Name</b></td>
+        <td><b>Surname</b></td>
+        <td><b>Birthday</b></td>
+        <td><b>Place of Birth</b></td>
+        <td><b>Address</b></td>
+        <td><b><center>Email</center></b></td>
+        <td><b>Telephone</b></td>
+        <td><b>Username</b></td>
+        <td><b>Salary</b></td>
+        <td><b>Current Position</b></td>
+        <td><b>Action</b></td>
+        <td><b>Started Date</b></td>
+        </tfoot>
+    </table>
+
+    <script src="~/assets/js/jquery-1.10.2.min.js"></script>
+    <script src="~/assets/js/alican.js"></script>
+</body>
+</html>
