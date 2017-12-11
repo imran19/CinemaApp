@@ -398,3 +398,5 @@ namespace CinemaApp.Controllers
         }
     }
 }
+
+// provjera da li radi github sync
